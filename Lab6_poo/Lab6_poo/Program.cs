@@ -35,7 +35,7 @@ namespace Lab6_poo
             List<Empresa> empresa = new List<Empresa>();
             empresa.Add(empresa1);
 
-            Console.WriteLine("1. Crear empresa \n2. Subir empresa \n3. Mostrar empresas");
+            Console.WriteLine("1. Crear empresa \n2. Subir empresa \n3. Mostrar empresas \n 4. Guardar informacion");
             int opcion = Convert.ToInt32(Console.ReadLine());
 
             if (opcion == 1)
@@ -76,6 +76,13 @@ namespace Lab6_poo
 
                 
             }
+            else if (opcion == 4)
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream("empresa.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+                formatter.Serialize(stream, empresa);
+                stream.Close();
+            }
 
         }
         public static void Crear_archivo(List<Empresa> empresa)
@@ -96,6 +103,7 @@ namespace Lab6_poo
             depto1.secciones.Add(seccion1);
             area1.departamento.Add(depto1);
             division1.area.Add(area1);
+
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream("empresa.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, empresa);

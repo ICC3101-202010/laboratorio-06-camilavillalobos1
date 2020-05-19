@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 namespace Lab6_poo
 {
+    [Serializable]
     public class Persona
     {
         private string Nombre;

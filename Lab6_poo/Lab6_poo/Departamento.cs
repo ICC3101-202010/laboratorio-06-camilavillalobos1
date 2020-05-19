@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 namespace Lab6_poo
 {
+    [Serializable]
     public class Departamento
     {
         public string Nombre_Departamento;
@@ -14,7 +17,7 @@ namespace Lab6_poo
             Encargado_Depto = encargado;
             
         }
-        public string Informacion()
+        public void Informacion()
         {
             string datos = "";
 
@@ -24,9 +27,10 @@ namespace Lab6_poo
             foreach (var item in secciones)
             {
                 Console.WriteLine("1. " + secciones[i - 1]);
+                datos += Console.ReadLine();
                 i++;
             }
-            return datos;
+          
 
         }
 

@@ -4,8 +4,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-
-
 namespace Lab6_poo
 {
     class MainClass
@@ -35,54 +33,61 @@ namespace Lab6_poo
             List<Empresa> empresa = new List<Empresa>();
             empresa.Add(empresa1);
 
-            Console.WriteLine("1. Crear empresa \n2. Subir empresa \n3. Mostrar empresas \n 4. Guardar informacion");
-            int opcion = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("1. Entrar \n2. Salir");
+            int respuesta = Convert.ToInt32(Console.ReadLine());
 
-            if (opcion == 1)
+            while (respuesta == 1)
             {
-                Crear_archivo(empresa);
-            }
-            else if (opcion == 2)
-            {
-                Console.WriteLine("Ingrese nombre del archivo: ");
-                string fileName = Console.ReadLine();
+                Console.WriteLine("1. Crear empresa \n2. Subir empresa \n3. Mostrar empresas \n4. Guardar informacion \n0. Salir");
+                int opcion = Convert.ToInt32(Console.ReadLine());
 
-                try
+                if (opcion == 1)
                 {
-                    Console.WriteLine("Abriendo archivo");
+                    Crear_archivo(empresa);
+                }
+                else if (opcion == 2)
+                {
+                    Console.WriteLine("Ingrese nombre del archivo: ");
+                    string fileName = Console.ReadLine();
+
+                    try
+                    {
+                        Console.WriteLine("Abriendo archivo");
+                        IFormatter formatter = new BinaryFormatter();
+                        Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        List<Empresa> empresas = (List<Empresa>)formatter.Deserialize(stream);
+                        Console.WriteLine("Cerrando archivo. Se abrio correctamente");
+                        stream.Close();
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        Console.WriteLine("No pudimos abrir el archivo");
+                        Console.WriteLine(e.Message);
+                        Crear_archivo(empresa);
+
+                    }
+
+                }
+                else if (opcion == 3)
+                {
+                    foreach(var item in empresa)
+
+                    Console.WriteLine(item.Informacion());
+
+                }
+                else if (opcion == 4)
+                {
                     IFormatter formatter = new BinaryFormatter();
-                    Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    List<Empresa> empresas = (List<Empresa>)formatter.Deserialize(stream);
-                    Console.WriteLine("Cerrando archivo. Se abrio correctamente");
+                    Stream stream = new FileStream("empresa.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+                    formatter.Serialize(stream, empresa);
                     stream.Close();
                 }
-                catch (FileNotFoundException e)
+                else if (opcion == 0)
                 {
-                    Console.WriteLine("No pudimos abrir el archivo");
-                    Console.WriteLine(e.Message);
-                    Crear_archivo(empresa);
-
+                    break;
                 }
-
             }
-            else if (opcion == 3)
-            {
-                int i = 1;
-                foreach (var item in empresa)
-                {
-                    Console.WriteLine("1. " + empresa[i-1].Informacion());
-                    i++;
-                }
-
-                
-            }
-            else if (opcion == 4)
-            {
-                IFormatter formatter = new BinaryFormatter();
-                Stream stream = new FileStream("empresa.bin", FileMode.Create, FileAccess.Write, FileShare.None);
-                formatter.Serialize(stream, empresa);
-                stream.Close();
-            }
+            
 
         }
         public static void Crear_archivo(List<Empresa> empresa)
@@ -108,6 +113,11 @@ namespace Lab6_poo
             Stream stream = new FileStream("empresa.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, empresa);
             stream.Close();
+        }
+
+        public static void Informacion(object o)
+        {
+            
         }
 
     }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 namespace Lab6_poo
 {
     [Serializable]
@@ -25,10 +27,10 @@ namespace Lab6_poo
             foreach (var item in division)
             {
                 Console.WriteLine("1. " + division[i-1]);
+                datos += Console.ReadLine();
                 i++;
             }
             return datos;
-            
 
         }
 

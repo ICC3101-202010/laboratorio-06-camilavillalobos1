@@ -9,6 +9,7 @@ namespace Lab6_poo
     {
         public string Nombre;
         public string Rut;
+        public List<Empresa> empresa = new List<Empresa>();
         public List<Division> division = new List<Division>();
 
         public Empresa(string nombre, string rut)

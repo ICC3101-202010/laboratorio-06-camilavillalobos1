@@ -22,6 +22,7 @@ namespace Lab6_poo
             Seccion seccion1 = new Seccion("Seccion1", new Persona("Patricio", "Villalobos", "984", "Encargado"));
             Bloque bloque1 = new Bloque("bloque1", new Persona("nombre1", "apellido1", "674", "Empleado"));
             Bloque bloque2 = new Bloque("bloque2", new Persona("nombre2", "apellido2", "774", "Empleado"));
+            
             bloque1.Personal.Add(persona1);
             bloque2.Personal.Add(persona3);
             seccion1.bloques.Add(bloque1);
@@ -32,6 +33,7 @@ namespace Lab6_poo
             empresa1.division.Add(division1);
             List<Empresa> empresa = new List<Empresa>();
             empresa.Add(empresa1);
+            bloque1.Personal.Add(persona1);
 
             Console.WriteLine("1. Entrar \n2. Salir");
             int respuesta = Convert.ToInt32(Console.ReadLine());
@@ -70,9 +72,36 @@ namespace Lab6_poo
                 }
                 else if (opcion == 3)
                 {
+
                     foreach(var item in empresa)
 
-                    Console.WriteLine(item.Informacion());
+                    Console.WriteLine("Nombre: "+ item.Nombre);
+
+                    foreach (var item in empresa)
+                    {
+                        foreach(var item1 in empresa1.division)
+                        {
+                            Console.WriteLine("Division" + division1.Nombre_Division +"Encargado" + division1.Encargado_Division);
+                        }
+
+                        foreach (var item2 in division1.area)
+                        {
+                            Console.WriteLine("Area" + area1.Nombre_Area+ "Encargado" + area1.Encargado_Area);
+                        }
+                        foreach (var item3 in area1.departamento)
+                        {
+                            Console.WriteLine("Departamento" + depto1.Nombre_Departamento + "Encargado" + depto1.Encargado_Depto);
+                        }
+                        foreach (var item4 in depto1.secciones)
+                        {
+                            Console.WriteLine("Seccion" + seccion1.Nombre_Seccion + "Encargado" + seccion1.Encargado_Seccion);
+                        }
+                        foreach (var item5 in seccion1.bloques)
+                        {
+                            Console.WriteLine("Bloque" + bloque1.Nombre_Bloque + "Encargado" + bloque1.Encargado_Bloque);
+                        }
+
+                    }
 
                 }
                 else if (opcion == 4)

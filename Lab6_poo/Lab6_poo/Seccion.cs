@@ -7,7 +7,7 @@ namespace Lab6_poo
     [Serializable]
     public class Seccion
     {
-        private string Nombre_Seccion;
+        public string Nombre_Seccion;
         public Persona Encargado_Seccion;
         public List<Bloque> bloques = new List<Bloque>();
 
